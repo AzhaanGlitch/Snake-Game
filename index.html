@@ -10,55 +10,88 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Snake Game</h1>
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-label">Score</span>
-                    <span class="stat-value" id="current-score">0</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">High Score</span>
-                    <span class="stat-value" id="high-score">0</span>
-                </div>
-            </div>
+            <h1>SNAKE</h1>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
         </div>
         
-        <div class="game-wrapper">
-            <div class="game-container" id="game-container"></div>
-            
-            <div class="start-screen" id="start-screen">
-                <div class="start-content">
-                    <h2>Ready to Play?</h2>
-                    <p>Use arrow keys to control the snake</p>
-                    <button class="btn-start" id="btn-start">Start Game</button>
-                    <div class="difficulty-selector">
-                        <label>Difficulty:</label>
-                        <select id="difficulty">
-                            <option value="150">Easy</option>
-                            <option value="100" selected>Medium</option>
-                            <option value="60">Hard</option>
-                        </select>
+        <div class="game-layout">
+            <div class="sidebar">
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-label">SCORE</div>
+                        <div class="stat-value" id="current-score">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">BEST</div>
+                        <div class="stat-value" id="high-score">0</div>
+                    </div>
+                </div>
+                
+                <div class="difficulty-section">
+                    <label class="section-label">DIFFICULTY</label>
+                    <select id="difficulty" class="difficulty-select">
+                        <option value="150">Easy</option>
+                        <option value="100" selected>Medium</option>
+                        <option value="60">Hard</option>
+                        <option value="40">Extreme</option>
+                    </select>
+                </div>
+                
+                <div class="controls-section">
+                    <div class="section-label">CONTROLS</div>
+                    <div class="control-list">
+                        <div class="control-item">
+                            <span class="control-key">↑ ↓ ← →</span>
+                            <span class="control-text">Move</span>
+                        </div>
+                        <div class="control-item">
+                            <span class="control-key">SPACE</span>
+                            <span class="control-text">Pause</span>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <div class="game-over-screen" id="game-over-screen">
-                <div class="game-over-content">
-                    <h2>Game Over!</h2>
-                    <p class="final-score">Score: <span id="final-score">0</span></p>
-                    <button class="btn-restart" id="btn-restart">Play Again</button>
+            <div class="game-wrapper">
+                <div class="game-container" id="game-container"></div>
+                
+                <div class="overlay-screen start-screen" id="start-screen">
+                    <div class="overlay-content">
+                        <h2>READY?</h2>
+                        <p>Press any arrow key or tap the button to start</p>
+                        <button class="btn-primary" id="btn-start">START GAME</button>
+                    </div>
                 </div>
-            </div>
-        </div>
-        
-        <div class="controls">
-            <div class="control-info">
-                <span class="control-key">↑ ↓ ← →</span>
-                <span class="control-text">Move</span>
-            </div>
-            <div class="control-info">
-                <span class="control-key">Space</span>
-                <span class="control-text">Pause</span>
+                
+                <div class="overlay-screen game-over-screen" id="game-over-screen">
+                    <div class="overlay-content">
+                        <h2>GAME OVER</h2>
+                        <div class="final-score-display">
+                            <span class="final-label">FINAL SCORE</span>
+                            <span class="final-value" id="final-score">0</span>
+                        </div>
+                        <button class="btn-primary" id="btn-restart">PLAY AGAIN</button>
+                    </div>
+                </div>
+                
+                <div class="pause-overlay" id="pause-overlay">
+                    <div class="pause-text">PAUSED</div>
+                </div>
             </div>
         </div>
     </div>
