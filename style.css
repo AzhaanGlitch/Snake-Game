@@ -39,8 +39,64 @@ body {
     justify-content: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
     padding: 20px;
+    padding-left: 100px;
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
+    position: relative;
+}
+
+/* Vertical title on the left of the entire container */
+.vertical-title-container {
+    position: fixed;
+    left: 50px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    font-family: 'Bitcount Prop Double Ink', monospace;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 5px;
+    color: var(--accent);
+    padding: 20px 0;
+    border-left: 5px solid var(--accent);
+    padding-left: 15px;
+    z-index: 999;
+    opacity: 0.95;
+}
+
+.page-logo {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    animation: fadeIn 0.5s ease;
+}
+
+.logo-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 3px solid var(--accent);
+    transition: all 0.3s ease;
+}
+
+.logo-img:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 6px 20px var(--accent);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .container {
@@ -60,6 +116,7 @@ body {
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid var(--border);
+    position: relative;
 }
 
 .header h1 {
@@ -375,6 +432,18 @@ body {
 
 /* Responsive Design */
 @media (max-width: 968px) {
+    body {
+        padding-left: 85px;
+    }
+    
+    .vertical-title-container {
+        left: 40px;
+        font-size: 18px;
+        letter-spacing: 4px;
+        padding-left: 12px;
+        border-left-width: 4px;
+    }
+    
     .game-layout {
         grid-template-columns: 1fr;
     }
@@ -402,11 +471,37 @@ body {
     .game-wrapper {
         padding-bottom: 100%;
     }
+    
+    .vertical-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
 }
 
 @media (max-width: 640px) {
     body {
         padding: 10px;
+        padding-top: 90px;
+        padding-left: 70px;
+    }
+    
+    .vertical-title-container {
+        left: 30px;
+        font-size: 14px;
+        letter-spacing: 3px;
+        padding-left: 10px;
+        border-left-width: 3px;
+    }
+    
+    .page-logo {
+        top: 15px;
+        left: 15px;
+    }
+    
+    .logo-img {
+        width: 50px;
+        height: 50px;
+        border-width: 2px;
     }
     
     .container {
@@ -474,6 +569,29 @@ body {
 }
 
 @media (max-width: 400px) {
+    body {
+        padding-top: 80px;
+        padding-left: 60px;
+    }
+    
+    .vertical-title-container {
+        left: 25px;
+        font-size: 11px;
+        letter-spacing: 2px;
+        padding-left: 8px;
+        border-left-width: 3px;
+    }
+    
+    .page-logo {
+        top: 10px;
+        left: 10px;
+    }
+    
+    .logo-img {
+        width: 45px;
+        height: 45px;
+    }
+    
     .header h1 {
         font-size: 18px;
         letter-spacing: 2px;
