@@ -48,7 +48,7 @@ body {
     border-radius: 16px;
     box-shadow: 0 8px 32px var(--shadow);
     overflow: hidden;
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     transition: background-color 0.3s ease;
 }
@@ -104,17 +104,18 @@ body {
 
 .game-layout {
     display: grid;
-    grid-template-columns: 280px 1fr;
+    grid-template-columns: 260px 1fr;
     gap: 0;
 }
 
 .sidebar {
     background: var(--bg-tertiary);
-    padding: 30px 25px;
+    padding: 25px 20px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 25px;
     border-right: 2px solid var(--border);
+    overflow-y: auto;
 }
 
 .stats-section {
@@ -125,7 +126,7 @@ body {
 
 .stat-card {
     background: var(--bg-secondary);
-    padding: 20px;
+    padding: 18px;
     border-radius: 12px;
     border: 2px solid var(--border);
     transition: all 0.3s ease;
@@ -145,7 +146,7 @@ body {
 }
 
 .stat-value {
-    font-size: 36px;
+    font-size: 32px;
     font-weight: 900;
     color: var(--accent);
     line-height: 1;
@@ -217,18 +218,22 @@ body {
 
 .game-wrapper {
     position: relative;
-    aspect-ratio: 1;
-    min-height: 500px;
+    width: 100%;
+    padding-bottom: 100%;
+    background: var(--bg-primary);
 }
 
 .game-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     display: grid;
     grid-template: repeat(25, 1fr) / repeat(25, 1fr);
     background: var(--bg-primary);
     padding: 20px;
-    gap: 0;
+    gap: 1px;
 }
 
 .food {
@@ -236,6 +241,7 @@ body {
     border-radius: 50%;
     box-shadow: 0 0 20px var(--accent);
     animation: pulse 0.8s ease-in-out infinite alternate;
+    margin: 2px;
 }
 
 @keyframes pulse {
@@ -251,15 +257,17 @@ body {
 
 .snake {
     background: var(--accent);
-    border-radius: 2px;
+    border-radius: 3px;
     opacity: 0.7;
+    margin: 2px;
 }
 
 .snake:first-of-type {
     background: var(--accent);
-    border-radius: 4px;
+    border-radius: 5px;
     opacity: 1;
     box-shadow: 0 0 10px var(--accent);
+    margin: 2px;
 }
 
 .overlay-screen {
@@ -392,7 +400,7 @@ body {
     }
     
     .game-wrapper {
-        min-height: 400px;
+        padding-bottom: 100%;
     }
 }
 
@@ -435,12 +443,8 @@ body {
         font-size: 28px;
     }
     
-    .game-wrapper {
-        min-height: 320px;
-    }
-    
     .game-container {
-        padding: 10px;
+        padding: 15px;
     }
     
     .overlay-content {
@@ -448,7 +452,7 @@ body {
     }
     
     .overlay-content h2 {
-        font-size: 32px;
+        font-size: 36px;
     }
     
     .overlay-content p {
@@ -456,7 +460,7 @@ body {
     }
     
     .final-value {
-        font-size: 42px;
+        font-size: 44px;
     }
     
     .btn-primary {
@@ -465,7 +469,7 @@ body {
     }
     
     .pause-text {
-        font-size: 32px;
+        font-size: 36px;
     }
 }
 
