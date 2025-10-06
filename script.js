@@ -3,10 +3,12 @@ let currentScoreEl = document.getElementById("current-score");
 let highScoreEl = document.getElementById("high-score");
 let startScreen = document.getElementById("start-screen");
 let gameOverScreen = document.getElementById("game-over-screen");
+let pauseOverlay = document.getElementById("pause-overlay");
 let btnStart = document.getElementById("btn-start");
 let btnRestart = document.getElementById("btn-restart");
 let finalScoreEl = document.getElementById("final-score");
 let difficultySelect = document.getElementById("difficulty");
+let themeToggle = document.getElementById("theme-toggle");
 
 let foodX, foodY;
 let headX = 12, headY = 12;
@@ -19,15 +21,29 @@ let gameSpeed = 100;
 let isGameRunning = false;
 let isPaused = false;
 
-// Load high score from memory
+// Theme Management
+function initTheme() {
+    const savedTheme = localStorage.getItem('snakeGameTheme');
+    const theme = savedTheme || 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+}
+
+function toggleTheme() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('snakeGameTheme', newTheme);
+}
+
+// High Score Management
 function loadHighScore() {
-    highScore = 0;
+    const saved = localStorage.getItem('snakeGameHighScore');
+    highScore = saved ? parseInt(saved) : 0;
     highScoreEl.textContent = highScore;
 }
 
-// Save high score to memory
 function saveHighScore() {
-    // Just update the display
+    localStorage.setItem('snakeGameHighScore', highScore);
     highScoreEl.textContent = highScore;
 }
 
@@ -52,6 +68,7 @@ function resetGame() {
     snakeBody = [];
     score = 0;
     isPaused = false;
+    pauseOverlay.style.display = "none";
     updateScore();
 }
 
@@ -86,7 +103,9 @@ function renderGame() {
     }
     
     // Move snake
-    snakeBody.pop();
+    if (snakeBody.length > 0) {
+        snakeBody.pop();
+    }
     headX += velocityX;
     headY += velocityY;
     snakeBody.unshift([headX, headY]);
@@ -128,14 +147,16 @@ function restartGame() {
 }
 
 function togglePause() {
-    if (isGameRunning && velocityX !== 0 || velocityY !== 0) {
+    if (isGameRunning && (velocityX !== 0 || velocityY !== 0)) {
         isPaused = !isPaused;
+        pauseOverlay.style.display = isPaused ? "flex" : "none";
     }
 }
 
 // Event Listeners
 btnStart.addEventListener("click", startGame);
 btnRestart.addEventListener("click", restartGame);
+themeToggle.addEventListener("click", toggleTheme);
 
 document.addEventListener("keydown", function(e) {
     let key = e.key;
@@ -151,7 +172,7 @@ document.addEventListener("keydown", function(e) {
     }
     
     // Handle pause
-    if (key === " ") {
+    if (key === " " || key === "Spacebar") {
         togglePause();
         return;
     }
@@ -174,5 +195,55 @@ document.addEventListener("keydown", function(e) {
     }
 });
 
+// Touch controls for mobile
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+gameContainer.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, false);
+
+gameContainer.addEventListener('touchend', function(e) {
+    if (isPaused) return;
+    
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, false);
+
+function handleSwipe() {
+    let diffX = touchEndX - touchStartX;
+    let diffY = touchEndY - touchStartY;
+    
+    // Start game on first swipe
+    if (!isGameRunning) {
+        startGame();
+    }
+    
+    if (Math.abs(diffX) > Math.abs(diffY)) {
+        // Horizontal swipe
+        if (diffX > 30 && velocityX !== -1) {
+            velocityY = 0;
+            velocityX = 1;
+        } else if (diffX < -30 && velocityX !== 1) {
+            velocityY = 0;
+            velocityX = -1;
+        }
+    } else {
+        // Vertical swipe
+        if (diffY > 30 && velocityY !== -1) {
+            velocityX = 0;
+            velocityY = 1;
+        } else if (diffY < -30 && velocityY !== 1) {
+            velocityX = 0;
+            velocityY = -1;
+        }
+    }
+}
+
 // Initialize
+initTheme();
 loadHighScore();
