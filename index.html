@@ -4,15 +4,65 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>snakeGame</title>
+    <title>Snake Game</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div class="container">
-        <div class="score-container">Press any (left right up down) key to start</div>
-        <div class="game-container">
+        <div class="header">
+            <h1>Snake Game</h1>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Score</span>
+                    <span class="stat-value" id="current-score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">High Score</span>
+                    <span class="stat-value" id="high-score">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="game-wrapper">
+            <div class="game-container" id="game-container"></div>
+            
+            <div class="start-screen" id="start-screen">
+                <div class="start-content">
+                    <h2>Ready to Play?</h2>
+                    <p>Use arrow keys to control the snake</p>
+                    <button class="btn-start" id="btn-start">Start Game</button>
+                    <div class="difficulty-selector">
+                        <label>Difficulty:</label>
+                        <select id="difficulty">
+                            <option value="150">Easy</option>
+                            <option value="100" selected>Medium</option>
+                            <option value="60">Hard</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-over-screen" id="game-over-screen">
+                <div class="game-over-content">
+                    <h2>Game Over!</h2>
+                    <p class="final-score">Score: <span id="final-score">0</span></p>
+                    <button class="btn-restart" id="btn-restart">Play Again</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <div class="control-info">
+                <span class="control-key">↑ ↓ ← →</span>
+                <span class="control-text">Move</span>
+            </div>
+            <div class="control-info">
+                <span class="control-key">Space</span>
+                <span class="control-text">Pause</span>
+            </div>
         </div>
     </div>
+    
     <script src="./script.js"></script>
 </body>
 </html>
